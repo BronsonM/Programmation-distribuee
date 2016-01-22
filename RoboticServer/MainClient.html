@@ -83,14 +83,20 @@
 <body>
 <div class="jumbotron" style="padding: 10px 10px 10px 10px; margin: 10px;">
 <div class="row">
-
-	<div class="col-md-offset-2 col-md-2">
+	<div class="col-md-12">
+		Status: <span id="message"></span>	<span id="status"></span>	 
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">	
+		URL: <input id="url" /><br />
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-offset-2 col-md-3">
 	  <input id="open" type="button" value="Connect" />
 	</div>
-	<div class="col-md-offset-1 col-md-2">
-  <span id="message"></span>	<span id="status"></span>	
-	</div>
-	<div class="col-md-offset-1 col-md-2 col-md-offset-2">
+	<div class="col-md-offset-2 col-md-3 col-md-offset-2">
 	  <input id="close" type="button" value="Disconnect" /><br />
 	</div>
 </div>
