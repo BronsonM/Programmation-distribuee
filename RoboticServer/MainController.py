@@ -23,8 +23,21 @@ print 'Server closed.'
 
 # Here we just receive a message from the Node.js server and pass it to the socket used for the task CommunicationWebServer
 def on_message(ws, message):
-	print "Message de MainController.py..."
-        print message
+	v = message.split (' ')
+
+	message = message.lower()
+	if v[0] == "fwd" or v[0] == "f":
+		print("avancer continuellement de " + v[1])
+	elif v[0] == "bwd" or v[0] == "b":
+		print("reculer continuellement de " + v[1])
+	elif v[0] == "cw":
+		print("tourner "+ v[1] +" degrees sens horaire")
+	elif v[0] == "ccw":
+		print("tourner "+ v[1] +" degres dans le sens antihoraire")
+	elif v[0] == "cam":
+		print("Etat camera: " + v[1])
+	else:
+		print("commande pas reconnus" + v[0])
 	conn.send(message)
 
 def on_error(ws, error):
@@ -40,7 +53,7 @@ def on_open(ws):
         while life == 1 :
             time.sleep(1)
             data = conn.recv(1024)
-            print 'Received data from client', repr(data), '...send it back...'
+            #print 'Received data from client', repr(data), '...send it back...'
             conn.send(data)
         time.sleep(1)
         ws.close()
