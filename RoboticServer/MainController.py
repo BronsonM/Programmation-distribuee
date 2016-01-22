@@ -39,7 +39,7 @@ def on_message(ws, message):
 	elif v[0] == "cam":
 		print("Etat camera: " + v[1])
 	else:
-		print("commande pas reconnus" + v[0])
+		print("commande pas reconnus (" + v[0] + ")")
 	conn.send(message)
 
 def on_error(ws, error):
