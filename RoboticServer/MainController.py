@@ -26,6 +26,8 @@ def on_message(ws, message):
 	v = message.split (' ')
 
 	message = message.lower()
+	
+	#validate if the user wrote a valid command
 	if v[0] == "fwd" or v[0] == "f":
 		print("avancer continuellement de " + v[1])
 	elif v[0] == "bwd" or v[0] == "b":
