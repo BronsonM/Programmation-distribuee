@@ -7,7 +7,7 @@ import socket
 
 HOST = '127.0.0.1'        # Local host
 PORT = 50007              # Arbitrary port
-
+msg = "-1"
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))
 s.listen(1)
@@ -23,29 +23,35 @@ print 'Server closed.'
 
 # Here we just receive a message from the Node.js server and pass it to the socket used for the task CommunicationWebServer
 def on_message(ws, message):
+	print("INCOMMING: " + message);
+	message = message.lower()
 	v = message.split (' ')
 
-	message = message.lower()
 	if v[0] == "fwd" or v[0] == "f":
 		print("avancer continuellement de " + v[1])
+		conn.send("0 "+v[1]);
 	elif v[0] == "bwd" or v[0] == "b":
 		print("reculer continuellement de " + v[1])
+		conn.send("1 "+v[1]);
 	elif v[0] == "cw":
 		print("tourner "+ v[1] +" degrees sens horaire")
+		conn.send("2 "+v[1]);
 	elif v[0] == "ccw":
 		print("tourner "+ v[1] +" degres dans le sens antihoraire")
+		conn.send("3 "+v[1]);
 	elif v[0] == "cam":
 		print("Etat camera: " + v[1])
+		conn.send("4 "+v[1]);
 	else:
 		print("commande pas reconnus" + v[0])
-	conn.send(message)
+		msg = "-1"
 
 def on_error(ws, error):
     print error
 
 def on_close(ws):
     print "### closed ###"
-
+	
 def on_open(ws):
     life = 1
     ws.send("IamRobot")
