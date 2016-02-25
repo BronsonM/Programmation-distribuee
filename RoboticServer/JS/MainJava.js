@@ -14,6 +14,10 @@ window.addEventListener("load", function(event) {
     var cam = document.getElementById("Camera");
     var zoom = document.getElementById("Zoom");
     var lift = document.getElementById("Lift");
+    var moteur = document.getElementById("Moteur");
+    var bras = document.getElementById("Bras");
+    var acceleration = document.getElementById("Acceleration");
+	
 
     var message = document.getElementById("message");
     var socket;
@@ -104,6 +108,16 @@ window.addEventListener("load", function(event) {
     stop.addEventListener("click", function(event) {
         alert("STOPPED");
         socket.send("stop");
+    });
+	
+    // Send text to the server when the Send button is clicked
+    bras.addEventListener("click", function(event) {
+        acceleration.disabled = true;
+    });
+	
+    // Send text to the server when the Send button is clicked
+    moteur.addEventListener("click", function(event) {
+        acceleration.disabled = false;
     });
 
     $(document).keyup(function(e) {
