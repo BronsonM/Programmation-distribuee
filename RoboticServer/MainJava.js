@@ -323,13 +323,13 @@ window.addEventListener("load", function(event) {
 
     defaultWheel.addEventListener("click", function(event) {
         if (bras.checked) {
-            acceleration.value = "D";
-            vitesse.value = "D";
             position.value = "D";
+            vitesse.value = "D";
+            acceleration.value = "D";
         } else {
-            acceleration.value = "D";
-            vitesse.value = "D";
             position.value = "D";
+            vitesse.value = "D";
+            acceleration.value = "D";
         }
     });
 
@@ -380,9 +380,9 @@ window.addEventListener("load", function(event) {
                 ac = brAcc[2];
             }
         }
-        acceleration.value = ac;
-        vitesse.value = vi;
         position.value = po;
+        vitesse.value = vi;
+        acceleration.value = ac;
     });
 
     $(document).keyup(function(e) {
