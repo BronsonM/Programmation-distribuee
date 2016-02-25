@@ -3,6 +3,16 @@
 var socket;
 var dPadState = "Move";
 var wheel = "TL";
+
+var btlAcc = ["D", "D", "D"];
+var btrAcc = ["D", "D", "D"];
+var bblAcc = ["D", "D", "D"];
+var bbrAcc = ["D", "D", "D"];
+var btlBras = ["D", "D"];
+var btrBras = ["D", "D"];
+var bblBras = ["D", "D"];
+var bbrBras = ["D", "D"];
+
 var tlAcc = ["D", "D", "D"];
 var trAcc = ["D", "D", "D"];
 var blAcc = ["D", "D", "D"];
@@ -26,6 +36,8 @@ var cancelWheel;
 
 // Initialize everything when the window finishes loading
 window.addEventListener("load", function(event) {
+	
+	//Variables
     var status = document.getElementById("status");
     var url = document.getElementById("url");
     var open = document.getElementById("open");
@@ -114,32 +126,32 @@ window.addEventListener("load", function(event) {
         text.value = "";
     });
 
-    // Send text to the server when the Send button is clicked
+    // Sets dpad to "Move" to the server when the Move button is clicked
     move.addEventListener("click", function(event) {
         dPadState = "Move";
     });
 
-    // Send text to the server when the Send button is clicked
+    // Sets dpad to "Cam" to the server when the Camera button is clicked
     cam.addEventListener("click", function(event) {
         dPadState = "Cam";
     });
 
-    // Send text to the server when the Send button is clicked
+    // Sets dpad to "Zoom" to the server when the Zoom button is clicked
     zoom.addEventListener("click", function(event) {
         dPadState = "Zoom";
     });
 
-    // Send text to the server when the Send button is clicked
+    // Sets dpad to "Lift" to the server when the Lift button is clicked
     lift.addEventListener("click", function(event) {
         dPadState = "Lift";
     });
 
-    // Send text to the server when the Send button is clicked
+    // Send stop to the server when the Send button is clicked
     stop.addEventListener("click", function(event) {
         socket.send("stop");
     });
 
-    // Send text to the server when the Send button is clicked
+	//Handles forum when radio button is changes
     bras.addEventListener("click", function(event) {
         acceleration.value = "D"
         acceleration.disabled = true;
@@ -185,7 +197,7 @@ window.addEventListener("load", function(event) {
 
     });
 
-    // Send text to the server when the Send button is clicked
+	//Handles forum when radio button is changes
     moteur.addEventListener("click", function(event) {
         acceleration.disabled = false;
         if (wheel == "TL") {
@@ -227,8 +239,18 @@ window.addEventListener("load", function(event) {
 
     });
 
+	//Send all information or forum when sendWheel is pressed
     sendWheel.addEventListener("click", function(event) {
 
+	btlAcc = tlAcc;
+	btrAcc = trAcc;
+	bblAcc = blAcc;
+	bbrAcc = brAcc;
+	btlBras = tlBras;
+	btrBras = trBras;
+	bblBras = blBras;
+	bbrBras = brBras;
+	
         if (bras.checked) {
             if (wheel == "TL") {
                 tlBras[0] = position.value;
@@ -273,7 +295,7 @@ window.addEventListener("load", function(event) {
                 tl = true;
             }
             if (trAcc[i] != "D") {
-                tb = true;
+                tr = true;
             }
             if (blAcc[i] != "D") {
                 bl = true;
@@ -320,29 +342,31 @@ window.addEventListener("load", function(event) {
         }
     });
 
-
+	//Sets current wheel to default value (defaultValue)
     defaultWheel.addEventListener("click", function(event) {
+		var defaultValue = 0;
         if (bras.checked) {
-            position.value = "D";
-            vitesse.value = "D";
-            acceleration.value = "D";
+            position.value = defaultValue;
+            vitesse.value = defaultValue;
+            acceleration.value = "";
         } else {
-            position.value = "D";
-            vitesse.value = "D";
-            acceleration.value = "D";
+            position.value = defaultValue;
+            vitesse.value = defaultValue;
+            acceleration.value = defaultValue;
         }
     });
 
+	//Resets all wheels back to previous version.
     cancelWheel.addEventListener("click", function(event) {
 
-        tlAcc = ["D", "D", "D"];
-        trAcc = ["D", "D", "D"];
-        blAcc = ["D", "D", "D"];
-        brAcc = ["D", "D", "D"];
-        tlBras = ["D", "D"];
-        trBras = ["D", "D"];
-        blBras = ["D", "D"];
-        brBras = ["D", "D"];
+        tlAcc = btlAcc;
+		trAcc = btrAcc;
+		blAcc = bblAcc;
+		brAcc = bbrAcc;
+		tlBras = btlBras;
+		trBras = btrBras;
+		blBras = bblBras;
+		brBras = bbrBras;
 
         var ac, vi, po;
 
@@ -392,6 +416,7 @@ window.addEventListener("load", function(event) {
     });
 });
 
+//Finds touh on d pad to tell what direction pressed
 function point_it(event) {
     var pos_x = event.offsetX ? (event.offsetX) : event.pageX - document.getElementById("pointer_div").offsetLeft;
     var pos_y = event.offsetY ? (event.offsetY) : event.pageY - document.getElementById("pointer_div").offsetTop;
@@ -446,7 +471,7 @@ function point_it(event) {
     socket.send(cmd);
 }
 
-
+//Detects click for wheel selected
 function point_robo(event) {
     var pos_x = event.offsetX ? (event.offsetX) : event.pageX - document.getElementById("robodiv").offsetLeft;
     var pos_y = event.offsetY ? (event.offsetY) : event.pageY - document.getElementById("robodiv").offsetTop;
@@ -548,11 +573,16 @@ function point_robo(event) {
 
 }
 
+//Allows only numbers to be pressed
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
+		else if(charCode == 100)
+		{
+			return true;
+		}
+			return false;
 
     }
     return true;
