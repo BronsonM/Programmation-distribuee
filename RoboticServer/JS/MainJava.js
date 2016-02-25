@@ -1,6 +1,8 @@
 "use strict";
 
 var dPadState = "Move";
+var wheel = "";
+
 // Initialize everything when the window finishes loading
 window.addEventListener("load", function(event) {
     var status = document.getElementById("status");
@@ -193,14 +195,18 @@ function point_robo(event) {
     if (max_y / 2 > pos_y) {
         if (max_x / 2 > pos_x) {
             document.getElementById('roboimg').src = "IMG/topLeft.jpg"
+			wheel = "TL";
         } else {
             document.getElementById('roboimg').src = "IMG/topRight.jpg"
+			wheel = "TR";
         }
     } else {
         if (max_x / 2 > pos_x) {
             document.getElementById('roboimg').src = "IMG/botLeft.jpg"
+			wheel = "BL";
         } else {
             document.getElementById('roboimg').src = "IMG/botRight.jpg"
+			wheel = "BR";
         }
     }
 

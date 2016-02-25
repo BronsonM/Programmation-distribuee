@@ -3,7 +3,7 @@
 	<head>
 		<title>WebSocket Echo Client</title>
 		<meta charset="UTF-8" />
-		<script src="js/MainJava.js"></script>
+		<script src="MainJava.js"></script>
 		<!-- Latest compiled and minified CSS and also Bootstrap -->
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- jQuery library -->
@@ -84,7 +84,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<input id="wheelComand" style="margin-bottom:20%; display: block; width: 100%;" onkeypress="return isNumber(event)"/>
+							<input id="Position" value="D" style="margin-bottom:20%; display: block; width: 100%;" onkeypress="return isNumber(event)"/>
 						</div>
 					</div>
 					<div class="row">
@@ -94,7 +94,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<input id="wheelComand" style="margin-bottom:20%; display: block; width: 100%;" onkeypress="return isNumber(event)"/>
+							<input id="Vitesse" value="D" style="margin-bottom:20%; display: block; width: 100%;" onkeypress="return isNumber(event)"/>
 						</div>
 					</div>
 					<div class="row">
@@ -104,7 +104,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<input id="Acceleration" style="margin-bottom:20%; display: block; width: 100%;" onkeypress="return isNumber(event)"/>
+							<input id="Acceleration" value="D" style="margin-bottom:20%; display: block; width: 100%;" onkeypress="return isNumber(event)"/>
 						</div>
 					</div>
 				</div>
@@ -114,17 +114,17 @@
 				<div class="col-sm-3">
 					<div class="row">
 						<div class="col-sm-12">
-							<input id="wheeldéfaut" value="Send"  type="button" style="margin-top:30%; display: block; width: 100%;"/>
+							<input id="sendWheel" value="Send"  type="button" style="margin-top:30%; display: block; width: 100%;"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<input id="wheelComand" value="Défaut"  type="button" style="margin-top:30%; display: block; width: 100%;"/>
+							<input id="defaultWheel" value="Défaut"  type="button" style="margin-top:30%; display: block; width: 100%;"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<input id="wheelCancel" value="Cancel"  type="button" style="margin-top:30%; display: block; width: 100%;"/>
+							<input id="cancelWheel" value="Cancel"  type="button" style="margin-top:30%; display: block; width: 100%;"/>
 						</div>
 					</div>
 				</div>
@@ -139,7 +139,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" name="textbox" id="text" style="display: block; width: 100%;">
+					<input type="text" name="textbox""" id="text" style="display: block; width: 100%;">
 				</div>
 			</div>
 			<div class="row">
