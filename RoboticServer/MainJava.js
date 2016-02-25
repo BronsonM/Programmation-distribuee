@@ -284,11 +284,11 @@ window.addEventListener("load", function(event) {
         }
 
         if (tl || tr) {
-            socket.send("FrontMot:" + tlAcc[0] + "," + tlAcc[1] + "," + tlAcc[2] + " " + trAcc[0] + "," + trAcc[1] + "," + trAcc[2]);
+            socket.send("FrontMot:" + tlAcc[0] + " " + tlAcc[1] + " " + tlAcc[2] + " " + trAcc[0] + " " + trAcc[1] + " " + trAcc[2]);
         }
 
         if (bl || br) {
-            socket.send("BackMot:" + blAcc[0] + "," + blAcc[1] + "," + blAcc[2] + " " + brAcc[0] + "," + brAcc[1] + "," + brAcc[2]);
+            socket.send("BackMot:" + blAcc[0] + " " + blAcc[1] + " " + blAcc[2] + " " + brAcc[0] + " " + brAcc[1] + "," + brAcc[2]);
         }
 
         tl = false;
@@ -312,11 +312,11 @@ window.addEventListener("load", function(event) {
         }
 
         if (tl || tr) {
-            socket.send("FrontBras:" + tlBras[0] + "," + tlBras[1] + "," + tlBras[2] + " " + trBras[0] + "," + trBras[1] + "," + trBras[2]);
+            socket.send("FrontBras:" + tlBras[0] + " " + tlBras[1] + " " + tlBras[2] + " " + trBras[0] + " " + trBras[1] + " " + trBras[2]);
         }
 
         if (bl || br) {
-            socket.send("BackBras:" + blBras[0] + "," + blBras[1] + "," + blBras[2] + " " + brBras[0] + "," + brBras[1] + "," + brBras[2]);
+            socket.send("BackBras:" + blBras[0] + " " + blBras[1] + " " + blBras[2] + " " + brBras[0] + " " + brBras[1] + " " + brBras[2]);
         }
     });
 
