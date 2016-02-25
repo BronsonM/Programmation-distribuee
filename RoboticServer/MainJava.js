@@ -288,7 +288,7 @@ window.addEventListener("load", function(event) {
         }
 
         if (bl || br) {
-            socket.send("BackMot:" + blAcc[0] + " " + blAcc[1] + " " + blAcc[2] + " " + brAcc[0] + " " + brAcc[1] + "," + brAcc[2]);
+            socket.send("BackMot:" + blAcc[0] + " " + blAcc[1] + " " + blAcc[2] + " " + brAcc[0] + " " + brAcc[1] + " " + brAcc[2]);
         }
 
         tl = false;
