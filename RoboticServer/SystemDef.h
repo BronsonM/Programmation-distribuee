@@ -11,9 +11,10 @@
 #define CATEGORIEGENERAL 0x0
 #define CATEGORIEACTION 0x1
 
+//Category types
 #define KEEPALIVEMESSAGETYPE 0x0a
 #define CONSIGNESANSREPLIQUES 0x1	// use to action a peripheral without reply
-#define REQUETE 0x2			// use to get the status of a peripheral
+#define REQUETE 0x2					// use to get the status of a peripheral
 #define CONSIGNEAVECREPLIQUES 0x3	// use to action a peripheral with a reply
 
 //Adress types

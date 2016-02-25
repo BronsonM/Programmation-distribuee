@@ -51,7 +51,8 @@ int main(int argc, char *argv[])
 		//sleep(1);
         
         
-        if (sem_trywait(&buflockfull)==0){ // Here we used sem_trywait to avoid blocking and be able to loop and send the KeepAlive
+        if (sem_trywait(&buflockfull)==0)
+		{ // Here we used sem_trywait to avoid blocking and be able to loop and send the KeepAlive
                 
 		//sem_wait(&buflockfull);
 		pthread_mutex_lock(&mutex);
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
         	sendMessage();
 		pthread_mutex_unlock(&mutex);
         	sem_post(&buflockempty);
-	}
+		}
 	//could be send by an external task
         sendKeepAlive();
 
