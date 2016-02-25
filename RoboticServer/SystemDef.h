@@ -11,9 +11,10 @@
 #define CATEGORIEGENERAL 0x0
 #define CATEGORIEACTION 0x1
 
+//Category types
 #define KEEPALIVEMESSAGETYPE 0x0a
 #define CONSIGNESANSREPLIQUES 0x1	// use to action a peripheral without reply
-#define REQUETE 0x2			// use to get the status of a peripheral
+#define REQUETE 0x2					// use to get the status of a peripheral
 #define CONSIGNEAVECREPLIQUES 0x3	// use to action a peripheral with a reply
 
 //Adress types
@@ -23,6 +24,10 @@
 #define MOTORREARDRIVE 0x11
 #define MOTORFRONTARM 0x12
 #define MOTORREARARM 0x13
+#define ACCESSOIRES 0x14
+#define CAMERA 0x15
+#define GPS 0x16
+#define SONARS 0x17
 
 
 
@@ -43,9 +48,14 @@ struct{ //Structure used for building messages
 	int PositionRight;
 	int SpeedRight;
 	int AccelerationRight;
-
+	
+	float panAngle;
+	float tiltAngle;
+	float zoomLevel;
+	int camON;
 	
 }Commandbuffer;
+
 
 /*struct{ //Structure used for building messages
 
