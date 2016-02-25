@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WebSocket Echo Client</title>
+  <meta charset="UTF-8" />
+  <script>
+    "use strict";
+    // Initialize everything when the window finishes loading
+    window.addEventListener("load", function(event) {
+      var status = document.getElementById("status");
+      var url = document.getElementById("url");
+      var open = document.getElementById("open");
+      var close = document.getElementById("close");
+      var send = document.getElementById("send");
+      var text = document.getElementById("text");
+      var message = document.getElementById("message");
+      var socket;
+      var RobotAvailable = 0;
+
+      status.textContent = "Not Connected";
+      url.value = "ws://localhost:8080";
+      close.disabled = true;
+      send.disabled = true;
+
+      // Create a new connection when the Connect button is clicked
+      open.addEventListener("click", function(event) {
+        open.disabled = true;
+        socket = new WebSocket(url.value, "wamp"); //use a websocket to communicate with the node.js server
+        
+
+        socket.addEventListener("open", function(event) {
+
+          //Check to see if the robot available
+          socket.send("RobotAvailable?");  // send the message to ask ther server if the robot is already connected
+          
+          
+        });
+
+        // Display messages received from the server
+        socket.addEventListener("message", function(event) {
+          if (event.data=="RobotAvailable"){	// if the received message means that the robot is available, then set a state variable
+            RobotAvailable = 1;
+            close.disabled = false;
+          send.disabled = false;
+          status.textContent = "Connected";
+          }
+          message.textContent = "Server Says: " + event.data;
+        });
+
+        // Display any errors that occur
+        socket.addEventListener("error", function(event) {
+          message.textContent = "Error: " + event;
+        });
+
+        socket.addEventListener("close", function(event) {
+          open.disabled = false;
+          status.textContent = "Not Connected";
+        });
+      });
+
+      // Close the connection when the Disconnect button is clicked
+      close.addEventListener("click", function(event) {
+        close.disabled = true;
+        send.disabled = true;
+        message.textContent = "";
+        socket.close();
+      });
+
+      // Send text to the server when the Send button is clicked
+      send.addEventListener("click", function(event) {
+        socket.send(text.value);
+        text.value = "";
+      });
+    });
+  </script>
+  		<!-- Latest compiled and minified CSS and also Bootstrap -->
+ 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    	<!-- jQuery library -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    	<!-- Latest compiled JavaScript -->
+    	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="jumbotron" style="padding: 10px 10px 10px 10px; margin: 10px;">
+<div class="row">
+	<div class="col-sm-12">
+		Status: <span id="message"></span>	<span id="status"></span>	 
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">	
+		URL: <input id="url" /><br />
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-offset-2 col-sm-3">
+	  <input id="open" type="button" value="Connect" />
+	</div>
+	<div class="col-sm-offset-2 col-sm-3 col-sm-offset-2">
+	  <input id="close" type="button" value="Disconnect" /><br />
+	</div>
+</div>
+</div>
+<div class="jumbotron" style="padding: 10px 10px 10px 10px; margin: 10px;">
+	<div class="row">
+		<div class="col-sm-offset-3 col-sm-6 col-sm-offset-3" >
+			<div class="embed-responsive embed-responsive-16by9">
+				<iframe src="https://www.youtube.com/embed/O7I6bnOFsZ4" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<input id="Movement" type="button" value="Movement" style="display: block; width: 100%;"/>
+		</div>
+		<div class="col-sm-6">
+			<input id="Camera" type="button" value="Camera" style="display: block; width: 100%;"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-5">
+			<img src="IMG/Dpad.png" class="img-responsive" alt="DPAD" style="display: block; width: 25en; height: 25en;" >
+		</div>
+		<div class="col-sm-5">
+			<div class="col-sm-3">
+			<img src="IMG/UpDown.png" class="img-responsive" alt="updown" style="display: block; width: 25en; height: 25en;" >
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="row">
+				<label><input type="radio" name="optradio">Lift</label>
+			</div>
+			<div class="row">
+				<label><input type="radio" name="optradio">Zoom</label>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<input id="Stop" type="button" value="Stop" style="display: block; width: 100%;"/>
+		</div>
+	</div>
+</div>
+<div class="jumbotron" style="padding: 10px 10px 10px 10px; margin: 10px;">
+	<div class="row">
+		<div class="col-sm-3">
+			<input id="wheel" type="button" value="wheel" style="display: block; width: 100%;"/>
+		</div>
+		<div class="col-sm-3">
+			<input id="wheel" type="button" value="wheel" style="display: block; width: 100%;"/>
+		</div>
+		<div class="col-sm-3">
+			<input id="wheel" type="button" value="wheel" style="display: block; width: 100%;"/>
+		</div>
+		<div class="col-sm-3">
+			<input id="wheel" type="button" value="wheel" style="display: block; width: 100%;"/>
+		</div>
+	</div>
+</div>
+<div class="jumbotron" style="padding: 10px 10px 10px 10px; margin: 10px;">
+	<div class="row">
+		<div class="col-sm-12">
+			<H3 style="display: block; width: 100%;">Zone de commande</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<input type="text" name="textbox" id="text" style="display: block; width: 100%;">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<span id="message" style="display: block; width: 100%;"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<input id="send" type="button" value="Send" style="display: block; width: 100%;"/>
+		</div>
+	</div>
+	
+</div>
+</body>
+</html>
